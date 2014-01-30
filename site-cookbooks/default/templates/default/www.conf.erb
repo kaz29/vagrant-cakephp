@@ -1,0 +1,48 @@
+<VirtualHost *:80>
+  ServerName <%= node[:vhostname] %>
+  DocumentRoot <%= node[:docroot] %>
+  RewriteEngine On
+
+  <Directory <%= node[:docroot] %>>
+    Options FollowSymLinks
+    AllowOverride All
+    Order allow,deny
+    Allow from all
+    SetEnv APP_ENV "development"
+
+    php_value max_execution_time 300
+    php_value upload_max_filesize 31457280
+    php_value post_max_size 31457280
+    php_value memory_limit 256M
+  </Directory>
+
+  <Directory />
+    Options FollowSymLinks
+    AllowOverride None
+  </Directory>
+
+<% if node[:backendbasepath] && node[:backendpath] %>
+  Alias <%= node[:backendbasepath] %> <%= node[:backendpath] %>
+  <Directory <%= node[:backendpath] %>>
+    Options FollowSymLinks
+    AllowOverride All
+    Order allow,deny
+    Allow from all
+    SetEnv APP_ENV "development"
+
+    php_value max_execution_time 300
+    php_value upload_max_filesize 31457280
+    php_value post_max_size 31457280
+    php_value memory_limit 256M
+  </Directory>
+<% end %>
+
+  LogLevel info
+  ErrorLog /var/log/apache2/<%= node[:vhostname] %>-error.log
+  CustomLog /var/log/apache2/<%= node[:vhostname] %>-access.log combined
+
+  DirectoryIndex index.html index.php
+
+  RewriteEngine On
+  RewriteLogLevel 0
+</VirtualHost>

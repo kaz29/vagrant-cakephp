@@ -1,0 +1,19 @@
+{
+    "name": "cakephp",
+    "repositories": [
+        {
+            "type": "pear",
+            "url": "http://pear.cakephp.org"
+        }
+    ],
+    "require": {
+        "pear-cakephp/cakephp": "2.4.4",
+        "cakedc/migrations": "*"
+    },
+    "require-dev": {
+        "cakephp/debug_kit": "2.2.*@dev"
+    },
+    "config": {
+        "vendor-dir": "Vendor/"
+    }
+}

@@ -1,0 +1,8 @@
+.DS_Store
+/.vagrant
+/Vendor
+/Plugin
+
+/app/tmp/logs/*.log
+/app/tmp/cache/models/myapp_cake_*
+/app/tmp/cache/persistent/myapp_cake_*

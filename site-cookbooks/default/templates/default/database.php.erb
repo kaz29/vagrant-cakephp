@@ -1,0 +1,79 @@
+<?php
+class DATABASE_CONFIG {
+    public $default = null;
+    public $production = array(
+		'datasource' => 'Database/Postgres',
+		'persistent' => false,
+		'host' => 'localhost',
+		'login' => '',
+		'password' => '',
+		'database' => '',
+		'prefix' => '',
+		'encoding' => 'utf8',
+	);
+
+    public $staging = array(
+		'datasource' => 'Database/Postgres',
+		'persistent' => false,
+		'host' => 'localhost',
+		'login' => '',
+		'password' => '',
+		'database' => '',
+		'prefix' => '',
+		'encoding' => 'utf8',
+	);
+
+	public $development = array(
+		'datasource' => 'Database/Postgres',
+		'persistent' => false,
+		'host' => 'localhost',
+		'login' => 'vagrant',
+		'password' => '',
+		'database' => 'cakephp',
+		'prefix' => '',
+		'encoding' => 'utf8',
+	);
+
+	public $bdd = array(
+		'datasource' => 'Database/Postgres',
+		'persistent' => false,
+		'host' => 'localhost',
+		'login' => '',
+		'password' => '',
+		'database' => '',
+		'prefix' => '',
+		'encoding' => 'utf8',
+	);
+
+	public $test = array(
+		'datasource' => 'Database/Postgres',
+		'persistent' => false,
+		'host' => 'localhost',
+		'login' => 'vagrant',
+		'password' => '',
+		'database' => 'cakephp_test',
+		'prefix' => '',
+		'encoding' => 'utf8',
+	);
+
+    public function __construct()
+    {
+        $env = env('APP_ENV');
+        switch($env) {
+            case 'production':
+                $this->default = $this->production;
+                break ;
+            case 'staging':
+                $this->default = $this->staging;
+                break ;
+            case 'bdd':
+                $this->test = $this->bdd;
+                $this->default = $this->bdd;
+                break;
+            case 'development':
+            default:
+                $this->default = $this->development;
+                break ;
+        }
+    }
+}
